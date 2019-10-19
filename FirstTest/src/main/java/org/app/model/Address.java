@@ -1,8 +1,11 @@
 package org.app.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Address {
@@ -17,9 +20,24 @@ public class Address {
 	private String city;
 
 	private String state;
+	
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="employee_id")
+	private Employee employee;
+	
+	
 
 	public long getId() {
 		return id;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
 
 	public void setId(long id) {
@@ -51,7 +69,5 @@ public class Address {
 	}
 	
 	
-	
-
 
 }
